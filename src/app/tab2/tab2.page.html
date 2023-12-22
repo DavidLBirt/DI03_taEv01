@@ -1,17 +1,33 @@
-<ion-header [translucent]="true">
+<!-- tab2.page.html -->
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Leer</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <!-- Creamos una tarjeta por cada noticia con ion-card -->
+  <ion-card *ngFor="let noticia of noticiasParaLeer">
+    <ion-card-header>
+      <!-- Nombre de la editorial -->
+      <ion-card-subtitle>{{ noticia.source.name }}</ion-card-subtitle>
+      <!-- Titulo -->
+      <ion-card-title>{{ noticia.title }}</ion-card-title>
+    </ion-card-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-card-content>
+      <!-- Imagen -->
+      <img src="{{ noticia.urlToImage }}">
+      <!-- Descripcion de la noticia -->
+      <p>{{ noticia.description }}</p>
+      <!-- Usamos el componente ion-item para alinear los botones, start a la izquierda y end a la derecha -->
+      <ion-item>
+        <ion-button fill="clear" slot="start" (click)="abrirNoticia(noticia)">Leer</ion-button>
+        <ion-icon name="trash" color="dark" slot="end" (click)="confirmarBorrarNoticia(noticia)"></ion-icon>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+
+
